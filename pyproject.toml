@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ai-pr-audit"
+version = "0.0.0"
+description = "GitHub App that flags AI-specific anti-patterns in pull requests"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "verepdev" }]
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.4",
+  "pytest>=8.0",
+  "pre-commit>=3.7",
+]
+
+[project.urls]
+Homepage = "https://github.com/verepdev/ai-pr-audit"
+Issues = "https://github.com/verepdev/ai-pr-audit/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ai_pr_audit"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
